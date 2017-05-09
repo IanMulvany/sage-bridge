@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_basicauth import BasicAuth
+import os 
 
 app = Flask(__name__)
 
@@ -12,3 +13,7 @@ basic_auth = BasicAuth(app)
 @basic_auth.required
 def secret_view():
     return render_template('secret.html')
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
