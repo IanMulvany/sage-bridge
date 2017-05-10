@@ -30,6 +30,8 @@ def index():
 @basic_auth.required
 def gdocs():
     logger.info("in gdocs")
+    jsonData = request.get_json()
+    logger.info(jsonData)
     logger.info(request.headers)
     logger.info(request.values)
     logger.info(request.args)
