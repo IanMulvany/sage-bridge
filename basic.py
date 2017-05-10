@@ -30,8 +30,12 @@ def index():
 @basic_auth.required
 def gdocs():
     response_dict = {}
-    logger.info("in gdocs")
+    logger.info("in gdocs looking at values")
     logger.info(request.values)
+    logger.info("looking at the data")
+    logger.info(request.data)
+    logger.info("looking at json")
+    logger.info(request.get_json(force=True))
     logger.info("asusming a GET request")
     logger.info(request.args.get("name"))
     logger.info("asusming a POST request")
