@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, json
 from flask_basicauth import BasicAuth
 import os
 import logging
@@ -32,7 +32,9 @@ def gdocs():
     logger.info("in gdocs")
     #    logger.info(request.headers)
     logger.info(request.values)
-    logger.info(request.args)
+    json_dict = json.loads(request.body.raw)
+    logger.info(json_dict)
+    # logger.info(request.args)
     jsonData = request.get_json()
     logger.info(jsonData)
     #logger.info(request.json)
