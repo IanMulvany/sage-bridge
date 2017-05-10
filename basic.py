@@ -26,9 +26,10 @@ def index():
     logger.info("george, we are home")
     return "hola!"
 
-@app.route('/from_gdocs', methods=['POST'])
+@app.route('/from_gdocs', methods=['POST','GET'])
 @basic_auth.required
 def gdocs():
+    logger.info("in gdocs")
     logger.info(request.json)
     return jsonify(request.json)
 
