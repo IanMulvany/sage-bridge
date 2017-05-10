@@ -31,8 +31,15 @@ def index():
 def gdocs():
     logger.info("in gdocs")
     #    logger.info(request.headers)
-    logger.info(request.values)
+    for value in request.values:
+        try:
+            logger.info("trying to unpack")
+            logger.info(value.do_dict())
+        except:
+            logger.info("unable to unpack")
+            logger.info(value)
     logger.info(request.get_data)
+    logger.info(request.json)
     # json_dict = json.loads(request.body.raw)
     # logger.info(json_dict)
     # logger.info(request.args)
