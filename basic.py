@@ -40,6 +40,7 @@ def gdocs():
         except:
             logger.info("unable to unpack")
             logger.info(value)
+        logger.info(value["name"])
     # logger.info(request.get_data)
     # logger.info(request.json)
     # # json_dict = json.loads(request.body.raw)
