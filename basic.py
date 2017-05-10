@@ -20,6 +20,7 @@ def secret_view():
     return render_template('secret.html')
 
 @app.route('/testr', methods=['GET'])
+@basic_auth.required
 def requests():
     test_url = "https://api.crossref.org/works/10.1037/0003-066X.59.1.29/agency"
     # return jsonify(test_url)
