@@ -29,26 +29,15 @@ def index():
 @app.route('/from_gdocs', methods=['POST','GET'])
 @basic_auth.required
 def gdocs():
+    response_dict = {}
     logger.info("in gdocs")
-    #    logger.info(request.headers)
-    for value in request.values:
-        logger.info(value)
-        try:
-            logger.info(value.do_dict())
-            logger.info("unpacked")
-            logger.info(value)
-        except:
-            logger.info("unable to unpack")
-            logger.info(value)
-        logger.info(value["name"])
-    # logger.info(request.get_data)
-    # logger.info(request.json)
-    # # json_dict = json.loads(request.body.raw)
-    # # logger.info(json_dict)
-    # # logger.info(request.args)
-    # jsonData = request.get_json()
-    # logger.info(jsonData)
-    #logger.info(request.json)
+    logger.info(request.values)
+    logger.info("asusming a GET request")
+    logger.info(request.args.get("name"))
+    logger.info("asusming a POST request")
+    logger.info(request.form.get("name"))
+    logger.info("not making assumpotions about the method")
+    logger.info(request.values.get("name"))
     return("{'I got your back'}")
 
 @app.route('/secret')
