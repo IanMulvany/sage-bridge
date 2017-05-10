@@ -1,7 +1,18 @@
 from flask import Flask, render_template, jsonify
 from flask_basicauth import BasicAuth
 import os
+import logging
+#  from logging.config import fileConfig
 import requests as r
+
+logger = logging.getLogger()
+handler = logging.StreamHandler()
+formatter = logging.Formatter(
+        '%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
+
 
 app = Flask(__name__)
 
@@ -12,6 +23,7 @@ basic_auth = BasicAuth(app)
 
 @app.route('/')
 def index():
+    logger.info("george, we are home")
     return "hola!"
 
 @app.route('/secret')
