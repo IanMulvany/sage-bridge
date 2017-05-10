@@ -26,7 +26,7 @@ def index():
     logger.info("george, we are home")
     return "hola!"
 
-@app.route('/from_gdocs', methods=['POST','GET'])
+@app.route('/from_gdocs', methods=['POST'])
 @basic_auth.required
 def gdocs():
     response_dict = {}
@@ -35,7 +35,7 @@ def gdocs():
     logger.info("looking at the data")
     logger.info(request.data)
     logger.info("looking at json")
-    logger.info(request.get_json(force=True))
+    # logger.info(request.get_json(force=True))
     logger.info("asusming a GET request")
     logger.info(request.args.get("name"))
     logger.info("asusming a POST request")
