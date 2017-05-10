@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from flask_basicauth import BasicAuth
 import os
 import logging
@@ -25,6 +25,12 @@ basic_auth = BasicAuth(app)
 def index():
     logger.info("george, we are home")
     return "hola!"
+
+@app.route('/from_gdocs', methods=['POST'])
+@basic_auth.required
+def gdocs():
+    logger.info(request.json)
+    return jsonify(request.json)
 
 @app.route('/secret')
 @basic_auth.required
