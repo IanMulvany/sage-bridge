@@ -84,6 +84,11 @@ def requests():
     response = r.get(test_url)
     return (response.text, response.status_code, response.headers.items())
 
+@app.route('/boot', methods=['GET'])
+def boottest():
+    return render_template("example.html")
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, threaded=True)
