@@ -44,6 +44,21 @@ def gdocs():
     logger.info(request.values.get("name"))
     return("{'I got your back'}")
 
+@app.route('/test_ingest', methods=['POST'])
+def ingest():
+    name = request.form.get("name")
+
+    interest = request.form.get("interest")
+    logger.info(request.form.get("interest"))
+    email = request.form.get("email")
+    logger.info(request.form.get("email"))
+    created = date.today() # request.form.get("created")
+    logger.info(request.form.get("created"))
+    user = SSUser(name, interest, email)
+    db.session.add(user)
+    db.session.commit()
+    return("{'I got your back'}")
+
 @app.route('/secret')
 @basic_auth.required
 def secret_view():
