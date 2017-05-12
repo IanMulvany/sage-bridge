@@ -18,11 +18,18 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.setLevel(logging.DEBUG)
 
-
 app = Flask(__name__)
-
+Bootstrap(app)
+admin = Admin(app, name='microblog', template_mode='bootstrap3')
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['BASIC_AUTH_USERNAME'] = 'john'
 app.config['BASIC_AUTH_PASSWORD'] = 'asff'
+db = SQLAlchemy(app)
+
+from models import CourseId, SSUser
+admin.add_view(ModelView(CourseId, db.session))
+admin.add_view(ModelView(SSUser, db.session))
 
 basic_auth = BasicAuth(app)
 
