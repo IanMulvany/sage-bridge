@@ -1,1 +1,3 @@
 *.pyc
+.env.fish
+.env.heroku
