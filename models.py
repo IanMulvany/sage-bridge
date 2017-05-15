@@ -31,13 +31,16 @@ class SSUser(db.Model):
     name = db.Column(db.String())
     interest = db.Column(db.String())
     email = db.Column(db.String())
+    submitted = db.Column(db.Date())
+    created = db.Column(db.Date())
     # created_at = db.Column(db.DateTime)
 
-    def __init__(self, name=None, interest=None, email=None):
+    def __init__(self, name=None, interest=None, email=None, submitted=None, created=None):
         self.name = name
         self.interest = interest
         self.email = email
-        # self.created_at = created_at
+        self.submitted = submitted
+        self.created = created
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
