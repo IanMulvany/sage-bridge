@@ -84,6 +84,14 @@ def requests():
     response = r.get(test_url)
     return (response.text, response.status_code, response.headers.items())
 
+@app.route('/poll_db', methods=['GET'])
+def poll():
+    "test pulling data from the db about users"
+    users = SSUser.query.all()
+    # for user in users:
+    #     logger.info(user.name)
+    return render_template("purchasers.html", users=users)
+
 @app.route('/boot', methods=['GET'])
 def boottest():
     return render_template("example.html")
