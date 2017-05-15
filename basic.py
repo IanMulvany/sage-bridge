@@ -23,8 +23,6 @@ Bootstrap(app)
 admin = Admin(app, name='microblog', template_mode='bootstrap3')
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['BASIC_AUTH_USERNAME'] = 'john'
-app.config['BASIC_AUTH_PASSWORD'] = 'asff'
 db = SQLAlchemy(app)
 
 from models import CourseId, SSUser
@@ -80,9 +78,9 @@ def secret_view():
 @basic_auth.required
 def requests():
     test_url = "https://api.crossref.org/works/10.1037/0003-066X.59.1.29/agency"
-    # return jsonify(test_url)
-    response = r.get(test_url)
-    return (response.text, response.status_code, response.headers.items())
+    return jsonify(test_url)
+    # response = r.get(test_url)
+    # return (response.text, response.status_code, response.headers.items())
 
 @app.route('/poll_db', methods=['GET'])
 def poll():
