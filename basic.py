@@ -64,7 +64,7 @@ def ingest():
     logger.info(request.form.get("interest"))
     email = request.form.get("email")
     logger.info(request.form.get("email"))
-    created = date.today() # request.form.get("created")
+    created = date.today()
     logger.info(request.form.get("created"))
     user = SSUser(name, interest, email)
     db.session.add(user)
