@@ -6,6 +6,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_basicauth import BasicAuth
 import os
 import logging
+from datetime import datetime
 from datetime import date
 #  from logging.config import fileConfig
 import requests as r
@@ -36,34 +37,24 @@ def index():
     logger.info("george, we are home")
     return "hola!"
 
-@app.route('/from_gdocs', methods=['POST', 'GET'])
+@app.route('/from_gdocs', methods=['POST'])
 @basic_auth.required
 def gdocs():
-    response_dict = {}
-    logger.info("in gdocs looking at values")
-    logger.info(request.values)
-    logger.info("looking at the data")
-    logger.info(request.data)
-    logger.info("looking at json")
-    # logger.info(request.get_json(force=True))
-    logger.info("asusming a GET request")
-    logger.info(request.args.get("name"))
-    logger.info("asusming a POST request")
-    logger.info(request.form.get("name"))
-    logger.info("not making assumpotions about the method")
-    logger.info(request.values.get("name"))
+    name = request.form.get("name")
+    email = request.form.get("email")
+    interest = request.form.get("interest")
+    submitted = request.form.get("submitted") # e.g. 5/11/2017 6:47:19
+    user = SSUser(name, interest, email, submitted)
+    db.session.add(user)
+    db.session.commit()
     return("{'I got your back'}")
 
 @app.route('/test_ingest', methods=['POST'])
 def ingest():
     name = request.form.get("name")
-
     interest = request.form.get("interest")
-    logger.info(request.form.get("interest"))
     email = request.form.get("email")
-    logger.info(request.form.get("email"))
     created = date.today()
-    logger.info(request.form.get("created"))
     user = SSUser(name, interest, email)
     db.session.add(user)
     db.session.commit()

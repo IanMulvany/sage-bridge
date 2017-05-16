@@ -1,5 +1,6 @@
 from basic import db
 from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy.sql import func
 from datetime import datetime
 
 class CourseId(db.Model):
@@ -31,16 +32,15 @@ class SSUser(db.Model):
     name = db.Column(db.String())
     interest = db.Column(db.String())
     email = db.Column(db.String())
-    submitted = db.Column(db.Date())
-    created = db.Column(db.Date())
-    # created_at = db.Column(db.DateTime)
+    submitted = db.Column(db.DateTime())
+    created = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
-    def __init__(self, name=None, interest=None, email=None, submitted=None, created=None):
+    def __init__(self, name=None, interest=None, email=None, submitted=None):
         self.name = name
         self.interest = interest
         self.email = email
         self.submitted = submitted
-        self.created = created
+        self.created = server_default=func.now()
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
