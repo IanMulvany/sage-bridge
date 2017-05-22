@@ -93,14 +93,29 @@ def gdocs():
 def index():
 @auto.doc()
 @auto.doc()
+@app.route('/create_ss_transaction', methods=['POST'])
+# @basic_auth.required
+@auto.doc()
+def create_ss_transaction():
+    """
+    create a record of a squarespace transation in the brige app.
+    """
+    # try:
     name = request.form.get("name")
     email = request.form.get("email")
     interest = request.form.get("interest")
     submitted = request.form.get("submitted") # e.g. 5/11/2017 6:47:19
-    user = SSUser(name, interest, email, submitted)
-    db.session.add(user)
+    ss_transaction = SSTransaction(name, interest, email, submitted)
+    # check if bridge user exists with this email
+    bridge_user = create_or_get_bridge_user(email)
+    associate_bridge_user_transaction(bridge_user, ss_transaction)
+    db.session.add(ss_transaction)
     db.session.commit()
-    return("{'I got your back'}")
+    return jsonify("transaction created in the bridge app", 200)
+    # except:
+    #     message = "something failed in the function"
+    #     logger.info(message)
+    #     raise ProcessingError(message)
 
 def create_moodle_user_if_nonexistent(email):
     """
