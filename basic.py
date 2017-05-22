@@ -103,6 +103,48 @@ def index():
     return("{'I got your back'}")
 
 def create_moodle_user_if_nonexistent(email):
+    """
+    given an email
+    check if we have a moodle user record for this email locally
+    check if moodle already has a user with the email
+        if so check for potential problems, re name drift
+    if neither above occurs, then create this new user in moodle
+    """
+    bridge_user = create_or_get_bridge_user(email)
+    moodle_user = create_or_get_moodle_user(email)
+    associate_bridge_user_moodle_user(bridge_user, moodle_user)
+    # check if there is already a moodle user with this email.
+    criteria =  [{
+                    'key':'email', 'value':email
+                }]
+    users = moodle_api.call("core_user_get_users", criteria=criteria)
+    if uses == None:
+        api_call = "core_user_create_users"
+        users = [{
+            'username': 'username5', # username must be unique
+            'password': 'P-assword5',
+            'firstname': 'firstname5',
+            'lastname': 'lastname5',
+            'email': email,
+            'customfields': [{'type':'institution', 'value':'harvard'}]
+        }]
+
+        new_user = moodle_api.call("core_user_create_users", users=users)
+
+    criteria =  [{
+                    'key':'email', 'value':email
+                }]
+    users = moodle_api.call("core_user_get_users", criteria=criteria)
+
+    url = users[0].url
+    moodle_id = users[0].moodle_id
+
+    # TODO: unfuck this function
+    moodle_user = MoodleUser(email, moodle_id, moodle_url)
+
+    return True
+
+
 
 @app.route('/create_moodle_users', methods=['POST'])
 # @basic_auth.required
