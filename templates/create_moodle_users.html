@@ -1,0 +1,59 @@
+{% extends "nav.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Sage Bridge Users</div>
+  <div class="panel-body">
+    <p>List of users and their transactions<p/>
+  </div>
+
+  <!-- Table -->
+  <form class="form-inline" method="POST" action="{{ url_for('create_moodle_users') }}">
+  <table class="table">
+    <tr>
+      <th style="border-right: 1px solid black; padding: 5px; width:1%; white-space:nowrap; "><input type="checkbox" id="allcb" name="allcb"/></th>
+      <th>email</th>
+      <th>user id</th>
+    </tr>
+     {% for user in users %}
+     <tr>
+       <td style="border-right: 1px solid black; padding: 5px; width:1%; white-space:nowrap;"><input type="checkbox" id="cb{{loop.index}}" name="cb[]" value={{ user.email }}/></td>
+       <td>{{ user.email }}</td>
+       <td>{{ user.id }}</td>
+     </tr>
+     {% endfor %}
+  </table>
+<button type="submit" class="btn btn-default">Go</button>
+</form>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+
+<script>
+/*
+		* Click on select all checkbox
+		*/
+		$('#allcb').click(function(e) {
+			$('[name="cb[]"]').prop('checked', this.checked);
+		});
+
+		/*
+		* Click on another checkbox can affect the select all checkbox
+		*/
+		$('[name="cb[]"]').click(function(e) {
+			if ($('[name="cb[]"]:checked').length == $('[name="cb[]"]').length || !this.checked)
+				$('#allcb').prop('checked', this.checked);
+		});
+</script>
+{% endblock %}
