@@ -93,6 +93,14 @@ def gdocs():
 def index():
 @auto.doc()
 @auto.doc()
+
+@app.route('/list_ss_transactions', methods=['GET'])
+@auto.doc()
+def show_transactions():
+    "test pulling data from the db about users"
+    users = SSTransaction.query.all()
+    return render_template("purchasers.html", users=users)
+
 # @app.route('/from_gdocs', methods=['POST'])
 # @basic_auth.required
 # def gdocs():
