@@ -5,6 +5,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask.ext.autodoc import Autodoc
 from flask_basicauth import BasicAuth
+import moodle_api
 import os
 import logging
 from datetime import datetime
@@ -35,8 +36,6 @@ admin.add_view(ModelView(BridgeUser, db.session))
 admin.add_view(ModelView(MoodleUser, db.session))
 basic_auth = BasicAuth(app)
 
-@app.route('/')
-def index():
 class InvalidUsage(Exception):
     status_code = 400
 
@@ -105,12 +104,15 @@ def list_courses():
     logger.info("george, we are home")
     return "hola!"
 
-@app.route('/from_gdocs', methods=['POST'])
-@basic_auth.required
-def gdocs():
+@app.route('/')
 @auto.doc()
 def index():
+    return render_template("index.html")
+
+@app.route('/homepage')
 @auto.doc()
+def homepage():
+    return render_template("homepage.html")
 
 @app.route('/list_bridge_users')
 @auto.doc()
