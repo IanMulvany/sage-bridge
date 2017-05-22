@@ -21,7 +21,31 @@ class CourseId(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
-class SSUser(db.Model):
+class BridgeUser(db.Model):
+    """
+    should haver a one to one relationship with MoodleUser and be joined on email
+    should have a one to many relationship with SSTransactions
+    So this entity can have one record in Moodle
+    but can be responsible for many purchases of courses in SquareSpace
+    """
+    __tablename__ = 'bridge_user'
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String())
+    created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    moodle = db.relationship('MoodleUser', backref='bridge_user', uselist=False) # set to be one to one
+    squarespace = db.relationship('SSTransaction', backref='bridge_user',
+                                lazy='dynamic')
+    bridge_user_profile = db.relationship('BridgeUserProfile', backref='bridge_user',
+                                    lazy='dynamic')
+
+    def __init__(self, email=None):
+        self.email = email
+        self.created = server_default=func.now()
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
 class MoodleUser(db.Model):
     """
     This is a model to capture a Square Space user that gets pushed into
