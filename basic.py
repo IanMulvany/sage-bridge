@@ -28,10 +28,11 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import CourseId, SSUser
+from models import CourseId, SSTransaction, BridgeUser, MoodleUser
 admin.add_view(ModelView(CourseId, db.session))
-admin.add_view(ModelView(SSUser, db.session))
-
+admin.add_view(ModelView(SSTransaction, db.session))
+admin.add_view(ModelView(BridgeUser, db.session))
+admin.add_view(ModelView(MoodleUser, db.session))
 basic_auth = BasicAuth(app)
 
 @app.route('/')
