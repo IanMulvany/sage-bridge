@@ -69,6 +69,30 @@ class MoodleUser(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
+class BridgeUserProfile(db.Model):
+    """
+    contains deatils that someone might nter differently when they
+    sign up for more than one course, i.e. they might end up
+    putting in a name vairant, or they might put in a different
+    affiliation.
+    We can now store multiple versions of these against one email address
+    """
+    __tablename__ = 'bridge_user_profile'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    interest = db.Column(db.String())
+    bridgeuser_id = db.Column(db.Integer, db.ForeignKey('bridge_user.id'))
+    created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+
+    def __init__(self, interest=None, name=None):
+        self.interest = interest
+        self.name = name
+        self.created = server_default=func.now()
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
     """
     This is a model to capture a Square Space user that gets pushed into
     the system via API.
