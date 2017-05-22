@@ -1,0 +1,15 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">resources</h3>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <li><a href="{{ url_for('homepage') }}">User Homepage</a></li>
+      <li><a href="{{ url_for('documentation') }}">API Docs</a></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
