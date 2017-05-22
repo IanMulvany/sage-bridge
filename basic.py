@@ -80,9 +80,28 @@ def handle_processing_error(error):
     return response
 
 
+
+def get_moodle_courses():
+    """
+    ping moodle and get a list of courses
+    store course name and course id in local DB
+    store course run date in local db
+    """
+    return True
+
+@app.route('/get_courses')
 @auto.doc()
 def get_courses():
+    courses = get_moodle_courses()
+    logger.info(courses)
+    return "hola!"
+
+@app.route('/list_courses')
 @auto.doc()
+def list_courses():
+    """
+    show moodle courses that we have gotten info about
+    """
     logger.info("george, we are home")
     return "hola!"
 
