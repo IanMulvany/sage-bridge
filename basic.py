@@ -58,37 +58,7 @@ def index():
     db.session.commit()
     return("{'I got your back'}")
 
-@app.route('/test_ingest', methods=['POST'])
-def ingest():
-    name = request.form.get("name")
-    interest = request.form.get("interest")
-    email = request.form.get("email")
-    created = date.today()
-    user = SSUser(name, interest, email)
-    db.session.add(user)
-    db.session.commit()
-    return("{'I got your back'}")
-
-@app.route('/secret')
-@basic_auth.required
-def secret_view():
-    return render_template('secret.html')
-
-@app.route('/testr', methods=['GET'])
-@basic_auth.required
-def requests():
-    test_url = "https://api.crossref.org/works/10.1037/0003-066X.59.1.29/agency"
-    return jsonify(test_url)
-    # response = r.get(test_url)
-    # return (response.text, response.status_code, response.headers.items())
-
-@app.route('/poll_db', methods=['GET'])
-def poll():
-    "test pulling data from the db about users"
-    users = SSUser.query.all()
-    # for user in users:
-    #     logger.info(user.name)
-    return render_template("purchasers.html", users=users)
+def create_moodle_user_if_nonexistent(email):
 
 
 @app.route('/documentation')
