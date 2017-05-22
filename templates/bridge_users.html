@@ -1,0 +1,45 @@
+{% extends "nav.html" %}
+{% block title %}This is an example page{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Sage Bridge Users</div>
+  <div class="panel-body">
+    <p>List of users and their transactions<p/>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <tr>
+      <th>email</th>
+      <th>user id</th>
+    </tr>
+     {% for user in users %}
+     <tr>
+       <td>{{ user.email }}</td>
+       <td>{{ user.id }}</td>
+     </tr>
+         {% for transaction in user.squarespace %}
+         <tr>
+           <th>interest</th>
+           <th>transaction id</th>
+         </tr>
+          <tr>
+            <td> {{ transaction.interest }} </td>
+            <td> {{ transaction.id }} </td>
+          </tr>
+         {% endfor %}
+       </tr>
+     </tr>
+     {% endfor %}
+  </table>
+</div>
+</div>
+
+{% endblock %}
