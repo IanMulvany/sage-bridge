@@ -104,6 +104,16 @@ def index():
 
 def create_moodle_user_if_nonexistent(email):
 
+@app.route('/create_moodle_users_view', methods=['GET'])
+# @basic_auth.required
+def create_moodle_users_view():
+    """
+    show all bridge uses
+    allow the admin to select bridge users
+    create moodle users based on the selected brdige users
+    """
+    bridge_users = BridgeUser.query.all()
+    return render_template("create_moodle_users.html", users=bridge_users)
 
 @app.route('/documentation')
 def documentation():
