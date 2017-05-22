@@ -120,6 +120,12 @@ def create_or_get_bridge_user(email):
     logger.info(bridge_user)
     return bridge_user
 
+def associate_bridge_user_transaction(bridge_user, ss_transaction):
+    bridge_user.squarespace.append(ss_transaction)
+    db.session.add(bridge_user)
+    db.session.commit()
+    return True
+
 @app.route('/create_ss_transaction', methods=['POST'])
 # @basic_auth.required
 @auto.doc()
