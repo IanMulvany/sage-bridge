@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from flask.ext.autodoc import Autodoc
 from flask_basicauth import BasicAuth
 import os
 import logging
@@ -20,6 +21,7 @@ logger.addHandler(handler)
 logger.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
+auto = Autodoc(app)
 Bootstrap(app)
 admin = Admin(app, name='microblog', template_mode='bootstrap3')
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -34,12 +36,19 @@ basic_auth = BasicAuth(app)
 
 @app.route('/')
 def index():
+@auto.doc()
+def get_courses():
+@auto.doc()
     logger.info("george, we are home")
     return "hola!"
 
 @app.route('/from_gdocs', methods=['POST'])
 @basic_auth.required
 def gdocs():
+@auto.doc()
+def index():
+@auto.doc()
+@auto.doc()
     name = request.form.get("name")
     email = request.form.get("email")
     interest = request.form.get("interest")
@@ -85,6 +94,9 @@ def poll():
 def boottest():
     return render_template("example.html")
 
+@app.route('/documentation')
+def documentation():
+    return auto.html()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
