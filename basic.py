@@ -92,7 +92,20 @@ def gdocs():
 @auto.doc()
 def index():
 @auto.doc()
+
+@app.route('/list_bridge_users')
 @auto.doc()
+def bridge_users():
+    """
+    show a list of bridge users, and the
+    transactions that they have been associated with
+    """
+    bridge_users = BridgeUser.query.all()
+    return render_template("bridge_users.html", users=bridge_users)
+
+
+    "show a list of squarespace transactions that we have processed"
+    return render_template("homepage.html")
 
 @app.route('/list_ss_transactions', methods=['GET'])
 @auto.doc()
