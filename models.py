@@ -93,11 +93,12 @@ class BridgeUserProfile(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
+class SSTransaction(db.Model):
     """
     This is a model to capture a Square Space user that gets pushed into
     the system via API.
     """
-    __tablename__ = 'ss_user'
+    __tablename__ = 'ss_transaction'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
@@ -105,6 +106,7 @@ class BridgeUserProfile(db.Model):
     email = db.Column(db.String())
     submitted = db.Column(db.DateTime())
     created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    bridgeuser_id = db.Column(db.Integer, db.ForeignKey('bridge_user.id'))
 
     def __init__(self, name=None, interest=None, email=None, submitted=None):
         self.name = name
