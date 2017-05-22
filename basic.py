@@ -104,6 +104,22 @@ def index():
 #     db.session.add(user)
 #     db.session.commit()
 #     return("{'I got your back'}")
+
+def create_or_get_bridge_user(email):
+    """
+    given an email
+    return a bridge user object from the DB if it exists
+    else create it and return it
+    """
+    bridge_user = BridgeUser.query.filter_by(email=email).first()
+    logger.info(bridge_user)
+    if bridge_user == None:
+        bridge_user = BridgeUser(email)
+        db.session.add(bridge_user)
+        db.session.commit()
+    logger.info(bridge_user)
+    return bridge_user
+
 @app.route('/create_ss_transaction', methods=['POST'])
 # @basic_auth.required
 @auto.doc()
