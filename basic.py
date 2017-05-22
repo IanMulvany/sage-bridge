@@ -23,7 +23,7 @@ logger.setLevel(logging.DEBUG)
 app = Flask(__name__)
 auto = Autodoc(app)
 Bootstrap(app)
-admin = Admin(app, name='microblog', template_mode='bootstrap3')
+admin = Admin(app, name='SageBridge', template_mode='bootstrap3')
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
