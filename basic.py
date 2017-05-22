@@ -93,6 +93,17 @@ def gdocs():
 def index():
 @auto.doc()
 @auto.doc()
+# @app.route('/from_gdocs', methods=['POST'])
+# @basic_auth.required
+# def gdocs():
+#     name = request.form.get("name")
+#     email = request.form.get("email")
+#     interest = request.form.get("interest")
+#     submitted = request.form.get("submitted") # e.g. 5/11/2017 6:47:19
+#     user = SSUser(name, interest, email, submitted)
+#     db.session.add(user)
+#     db.session.commit()
+#     return("{'I got your back'}")
 @app.route('/create_ss_transaction', methods=['POST'])
 # @basic_auth.required
 @auto.doc()
