@@ -22,6 +22,29 @@ class CourseId(db.Model):
         return '<id {}>'.format(self.id)
 
 class SSUser(db.Model):
+class MoodleUser(db.Model):
+    """
+    This is a model to capture a Square Space user that gets pushed into
+    the system via API.
+    """
+    __tablename__ = 'moodle_user'
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String())
+    moodle_id = db.Column(db.String())
+    moodle_url = db.Column(db.String())
+    created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    bridgeuser_id = db.Column(db.Integer, db.ForeignKey('bridge_user.id'))
+
+    def __init__(self, email=None, moodle_id=None, moodle_url=None):
+        self.moodle_id = name
+        self.moodle_url = interest
+        self.email = email
+        self.created = server_default=func.now()
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
     """
     This is a model to capture a Square Space user that gets pushed into
     the system via API.
