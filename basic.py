@@ -104,6 +104,18 @@ def index():
 
 def create_moodle_user_if_nonexistent(email):
 
+@app.route('/create_moodle_users', methods=['POST'])
+# @basic_auth.required
+@auto.doc()
+def create_moodle_users():
+    """
+    create a record of a squarespace transation in the brige app.
+    """
+    emails = request.form.getlist("cb[]")
+    for email in emails:
+        create_moodle_user_if_nonexistent(email.rstrip("\")): #noticed that there is a trailing backslask on form data?
+    return jsonify("got emails", 200)
+
 @app.route('/create_moodle_users_view', methods=['GET'])
 # @basic_auth.required
 def create_moodle_users_view():
