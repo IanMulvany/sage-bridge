@@ -90,9 +90,6 @@ def poll():
     #     logger.info(user.name)
     return render_template("purchasers.html", users=users)
 
-@app.route('/boot', methods=['GET'])
-def boottest():
-    return render_template("example.html")
 
 @app.route('/documentation')
 def documentation():
