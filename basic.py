@@ -245,8 +245,9 @@ def create_moodle_users():
     """
     emails = request.form.getlist("cb[]")
     for email in emails:
-        create_moodle_user_if_nonexistent(email.rstrip("\")): #noticed that there is a trailing backslask on form data?
+        create_moodle_user_if_nonexistent(email) # .rstrip('\')): # noticed that there is a trailing backslask on form data
     return jsonify("got emails", 200)
+
 
 @app.route('/create_moodle_users_view', methods=['GET'])
 # @basic_auth.required
