@@ -4,8 +4,27 @@ This is a small heroku app to bridge between sales delivered in Squarespace and 
 It should allow the course admin to:
 
 - see what sales have happened for what courses listed in Squarespace
-- extract info about the purcasers
+- extract info about the purchasers
 - push a cohort of users into moodle
+
+# Qucickstart
+
+## Starting the project locally
+
+For Heroku settings info have a look at https://realpython.com/blog/python/flask-by-example-part-1-project-setup/
+
+Running locally using the fish shell
+
+```
+> set -x APP_SETTINGS "config.DevelopmentConfig"
+> set -x DATABASE_URL "postgresql://localhost/sage"
+> set -x BASIC_AUTH_PASSWORD "randompass"
+> set -x BASIC_AUTH_USERNAME "randomuser"
+> python3 runserver.py 
+```
+
+
+
 
 # TODO
 TODO: create a test page for the data hub, using example pages from bootstrap  
