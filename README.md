@@ -8,28 +8,28 @@ It should allow the course admin to:
 - push a cohort of users into moodle
 
 # TODO
-TODO: create a test page for the data hub, using example pages from bootstrap
-TODO: create moodle user creation endpoint
-TODO: refactor bridge users so that there is a one to many relationship between emails and course purchases
-TODO: add some testing of endpoints in to the application
-TODO: enable user enrollment to specific courses in moodle
-TODO: show bridge user, and moodle user ID in the bridge app
-TOOD: show which courses someone has purches in SquareSpace
-TODO: add an endpoint for listing courses in moodle
-TODO: add an endpoint for listing SMART product names in the bridge app
-TODO: add some error checking to see if an existing email comes in with a new name
+TODO: create a test page for the data hub, using example pages from bootstrap  
+TODO: create moodle user creation endpoint  
+TODO: refactor bridge users so that there is a one to many relationship between emails and course purchases  
+TODO: add some testing of endpoints in to the application  
+TODO: enable user enrollment to specific courses in moodle  
+TODO: show bridge user, and moodle user ID in the bridge app  
+TOOD: show which courses someone has purches in SquareSpace  
+TODO: add an endpoint for listing courses in moodle  
+TODO: add an endpoint for listing SMART product names in the bridge app  
+TODO: add some error checking to see if an existing email comes in with a new name  
 	think about allowing for name versions / name changes
-TODO: setup a model and connection to postgres that maps Squarespace course ids with A2F and moodle course ids
+TODO: setup a model and connection to postgres that maps Squarespace course ids with A2F and moodle course ids  
 TODO: get a toy call from the squarespace API working
-	blocked by not having access to the API
+	blocked by not having access to the API  
 
 # DONE
-TODO: sketch a minimal UI to support the application @done
-TODO: figure out how to inspect heroku logs @done
+TODO: sketch a minimal UI to support the application @done  
+TODO: figure out how to inspect heroku logs @done  
 TODO: create an enpoint that accepts post notifications using HTTP basic Auth
-	we can have the resultant data just dump to log if we want at this stage @done
-TODO: prove that we can connect to that endpoint from a google sheets @done
-TODO: push a toy api call into moodle @done(2017-05-18)
+	we can have the resultant data just dump to log if we want at this stage @done  
+TODO: prove that we can connect to that endpoint from a google sheets @done  
+TODO: push a toy api call into moodle @done(2017-05-18)  
 
 # Moodle Integration
 
